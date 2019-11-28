@@ -25,7 +25,9 @@ class DashboardController extends Controller
             foreach ($databases as $database){
                 try {
                     $database = trim($database);
-                    $storagePath = storage_path("backups/$database.sql");
+
+                    $filename = date("Y-m-d-H:i:s"). "$database.sql";
+                    $storagePath = storage_path("backups/".$filename);
                     $process = new Process(sprintf(
                         'mysqldump -u%s -p%s %s > %s',
                         config('database.connections.mysql.username'),
@@ -37,6 +39,7 @@ class DashboardController extends Controller
                     $process->mustRun();
                     echo "The backup of $database has been proceed successfully and stored path is: $storagePath <br>";
                 } catch (ProcessFailedException $exception) {
+                    dd($exception->getMessage());
                     echo "The backup of $database process has been failed.<br>";
                 }
             }
