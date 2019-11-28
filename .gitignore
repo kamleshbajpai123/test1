@@ -1,9 +1,8 @@
 /node_modules
 /public/hot
-/public/storage/app
-/public/storage/framework
-/public/storage/logs
-/storage/*.key
+/storage/app
+/storage/framework
+/storage/logs
 /vendor
 /.idea
 /.vscode
